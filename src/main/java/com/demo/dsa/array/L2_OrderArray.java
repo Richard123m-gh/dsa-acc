@@ -5,7 +5,7 @@ package com.demo.dsa.array;
  * @date 2019-09-02
  *
  *
- * 有序数组
+ * 有序数组，二分查找
  *
  */
 public class L2_OrderArray {
