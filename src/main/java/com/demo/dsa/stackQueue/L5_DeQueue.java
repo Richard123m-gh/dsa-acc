@@ -59,6 +59,7 @@ class DoubleEndedQueue{
     }
 
     /*
+        指针位置
         取模运算,实现指针在数组中无限的循环
 
         即在边界时，在尾部右移至头部，即由下标n转为下标0；
@@ -75,6 +76,82 @@ class DoubleEndedQueue{
           }
 
           return index;
+    }
+
+    //在头部插入元素
+    public void addHead(Object data){
+
+        this.head=getMod(head-1); //指针左移一位，取真正的指针位置
+
+        elementsArray[head]=data;
+
+        if(head==tail){//队列已满，扩容
+
+        }
+
+    }
+
+    //在尾部插入
+    public void addTail(Object data){
+
+        //先把数据插入
+        elementsArray[tail]=data;
+        tail=getMod(tail+1); //尾部指针，向右移动一位
+
+        if(tail==head){  //队列已满，进行扩容
+
+        }
+
+    }
+
+    //在头部移除
+    public Object removeHead(){
+
+        Object removeObj=null;
+
+         //判断是否为空队列
+        if(head!=tail){
+            removeObj=elementsArray[head];
+            elementsArray[head]=null;
+            head=getMod(head+1);
+        }
+
+        return removeObj;
+
+    }
+
+
+    //删除尾部数据
+    public Object removeTail(){
+        Object removeObj=null;
+
+        //判断队列是否为空
+        if(head!=tail){
+            tail=getMod(tail-1);
+            removeObj=elementsArray[tail];
+            elementsArray[tail]=null;
+        }
+
+        return removeObj;
+    }
+
+
+    //只获取头部的元素，不删除
+    public Object peekHead(){
+         if(tail!=head){
+             return elementsArray[head];
+         }else {
+             return null;
+         }
+    }
+
+    //只获取尾部元素，不删除
+    public Object peekTail(){
+        if(head!=tail){
+            return elementsArray[getMod(tail-1)];
+        }else{
+            return null;
+        }
     }
 
 
