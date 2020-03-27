@@ -11,7 +11,9 @@ package com.demo.dsa.linked;
  *  另一个部分存储下一个节点的地址，
  *  最后一个节点存储地址的部分指向空值。链表有一个头节点
  *
- */
+ *
+ *  java中的单向链表
+  */
 public class L1_SingleLinked {
 
     public static void main(String[] args) {
@@ -21,9 +23,14 @@ public class L1_SingleLinked {
            singleLinkedList.add("b");
            singleLinkedList.add("c");
 
-        System.out.println(singleLinkedList);
-        System.out.println(singleLinkedList.find("d"));
-        System.out.println(singleLinkedList.delete());
+           singleLinkedList.display();
+
+           //singleLinkedList.del();
+            singleLinkedList.delete("b");
+
+           singleLinkedList.display();
+
+
 
 
     }
@@ -88,7 +95,7 @@ class SingleLinkedList{
 
     }
 
-    public  Object delete(){
+    public  Object del(){
 
         if(this.size>0){
              Object obj=head.data;
@@ -123,6 +130,64 @@ class SingleLinkedList{
     public boolean isEmpty(){
           return size==0;
         // return head.next==null? false:true;
+    }
+
+
+    //删除指定的节点，删除成功返回true，失败false
+    public boolean delete(Object value){
+          if(isEmpty())  return false;
+
+          Node current=head;
+          Node previous=head;
+          while (!value.equals(current.data)){
+              if(current.next==null) { //链表中没有
+                  return false;
+              }else{
+                   previous=current;
+                   current=current.next;
+
+              }
+          }
+
+          //循环终止了，还会继续执行下面的语句，证明找到了节点
+          if(current==head){  //找的节点在头节点
+              head=head.next;
+              size--;
+          }else{  //找的节点在中间、结尾
+              previous.next=current.next;
+              size--;
+          }
+
+          return true;
+    }
+
+    //遍历输出所有的node信息
+    public void display(){
+         if(size>0){
+             Node current=head;
+             int tmpsize=size;
+             if(tmpsize>1){
+
+                 for(int i=tmpsize;i>0;i--){
+                     if(current==head) {
+                         System.out.print("["+current.data+" -> ");
+                     }else if(current.next==null){
+                         System.out.println(current.data+"]");
+                     }else{
+                         System.out.print(current.data+" -> ");
+                     }
+                     current=current.next;
+                 }
+
+                 System.out.println("********");
+
+             }else {
+                 System.out.println("["+head+"]");
+             }
+
+         }else{  //空链表
+             System.out.println("[]");
+         }
     }
 
 
