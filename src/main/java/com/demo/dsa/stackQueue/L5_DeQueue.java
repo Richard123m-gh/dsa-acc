@@ -5,6 +5,7 @@ import sun.lwawt.macosx.CSystemTray;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Stack;
+import java.util.concurrent.DelayQueue;
 
 /**
  * @author Richard123m
@@ -12,6 +13,7 @@ import java.util.Stack;
  *
  * 双向队列
  *
+ *  Deque是接口，其实现类有ArrayDequeu、LinkedList
  * jdk中的双向队列 ArrayDeque 按位与，取模
  *
  **/
@@ -19,20 +21,25 @@ public class L5_DeQueue {
 
     public static void main(String[] args) {
 
+        //实际中只可能从一边增加新无素
+
         DoubleEndedQueue queue=new DoubleEndedQueue();
         queue.addHead(1);
         queue.addHead(2);
 
+        queue.addTail(3);
+
         //把双端队列当栈使用
-        System.out.println(queue.peekHead());
+        //System.out.println(queue.peekHead());
 
         //把双端队列当作普通队列使用
-        System.out.println(queue.peekTail());
+      //  System.out.println(queue.peekTail());
 
 
         while (!queue.isEmpty()){
             System.out.println(queue.removeHead());
         }
+
 
 
 
@@ -99,6 +106,7 @@ class DoubleEndedQueue{
         this.head=getMod(head-1); //指针左移一位，取真正的指针位置
 
         elementsArray[head]=data;
+        System.out.println("头部指针=>"+head);
 
         if(head==tail){//队列已满，扩容
              expand();
@@ -126,6 +134,8 @@ class DoubleEndedQueue{
 
          //判断是否为空队列
         if(head!=tail){
+
+            System.err.println(head);
             removeObj=elementsArray[head];
             elementsArray[head]=null;
             head=getMod(head+1);
@@ -189,7 +199,10 @@ class DoubleEndedQueue{
          //获取后端插入的数据个数
          int tailNum=head;
 
-         //分两步复制数组
+         /*
+             分两步复制数组
+             Object src,  int  srcPos,Object dest, int destPos,int length
+          */
          System.arraycopy(elementsArray,head,newObjArray,0,headNum); //把前端插入的数据，复制到了新数组的前面
          System.arraycopy(elementsArray,0,newObjArray,headNum,tailNum); //把后端插入的数据，复制到新数组中
 

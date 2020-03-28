@@ -57,6 +57,8 @@ class LowerStack{
         if(topPointer < (maxSize-1)){
             elemDataArray[++topPointer]=data;
         }
+
+        System.err.println("栈顶指针=>"+topPointer);
     }
 
     //实现出栈
