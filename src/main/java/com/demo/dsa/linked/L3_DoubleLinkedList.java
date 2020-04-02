@@ -195,6 +195,11 @@ class DoubleLinkedList{
         }
     }
 
+    //获取节点个数
+    public int getSize(){
+        return size;
+    }
+
 
 }
 
