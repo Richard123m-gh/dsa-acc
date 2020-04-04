@@ -29,8 +29,8 @@ public class L3_DoubleLinkedList {
 class DoubleLinkedList{
 
     private int size;    //链表的节点数
-    private Node head;   //head头节点指针
-    private Node tail;   //tail尾节点指针
+    private Node head;   //head头节点
+    private Node tail;   //tail尾节点
 
     public DoubleLinkedList() {
         size = 0;
