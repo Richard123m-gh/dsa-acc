@@ -5,6 +5,8 @@ package com.demo.dsa.stackQueue;
  * @date 2020-03-12
  *
  *
+ *   优先队列，可以排序的
+ *
  */
 public class L6_PriorityQueue {
 
