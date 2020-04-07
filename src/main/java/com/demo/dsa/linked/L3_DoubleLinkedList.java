@@ -116,7 +116,6 @@ class DoubleLinkedList{
     public Node find(Object data){
         Node current=head;
 
-
         while(current!=null){
             if(data.equals(current.data)){
                 return current;
