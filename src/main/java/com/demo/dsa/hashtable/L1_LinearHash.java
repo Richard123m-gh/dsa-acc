@@ -1,10 +1,12 @@
 package com.demo.dsa.hashtable;
 
+import sun.jvm.hotspot.jdi.CharValueImpl;
+
 /**
  * @author Richard123m
  * @date 2020-04-14
  *
- *  基于线性探测
+ *  基于线性探测的哈希表
  *
  *
  */
@@ -86,6 +88,87 @@ class MyHashTable{
      */
     public int hashFunction(int key){
           return key%arraySize;
+    }
+
+
+    //插入数据
+    public void insert(DataItem item){
+
+         //1. 如果hash表满了,对hash表进行扩容
+         if(isFull()){
+             System.out.println("哈希表已经满了,进行扩容.");
+
+         }
+
+         int data=item.getData();  //取出数值
+
+         //对data进行哈希化
+         int hashval=hashFunction(data);//目的是用这个hash值来做未保存数值的index
+
+         //条件即表示该位置被占用
+         while (hashArray[hashval]!=null && hashArray[hashval].getData()!=-1){
+              //进行线性探索,查找下面相邻的空位
+              hashval ++;
+              hashval=hashval % arraySize;  //hash值加1后,再进行哈希化
+         }
+
+         //while循环正常结束，表示找到了空位置
+         hashArray[hashval]=item;
+         itemNum++;
+
+
+    }
+
+
+
+    /*
+        扩容
+        不能将原数组的数据项，直接复制到新数组的相同位置上。
+
+     */
+    private void  extend(){
+
+          int num=arraySize;  //原数组的长度临时保存
+          itemNum=0; //对hash中保存的数据项个数重新计数
+          arraySize=arraySize*2; //将原数组扩2倍
+          DataItem[] oldDataItemArr=hashArray;  //把原数组的数据也临时保存
+          hashArray=new DataItem[arraySize];
+          for(int i=0;i<num;i++){
+              insert(oldDataItemArr[i]);
+          }
+
+
+    }
+
+
+    //删除
+    public DataItem delete(int data){
+         if(isEmpty()){
+             System.out.println("哈希表为空");
+             return null;
+         }else {
+             //删除之前都是查找，先查找要删除的目标
+             int hashval=hashFunction(data);
+             while (hashArray[hashval]!=null){
+                  if(hashArray[hashval].getData()==data){
+                        //找到要删除的目标
+                        DataItem temp=hashArray[hashval];
+                        hashArray[hashval]=delItem; //真正的删除动作
+                        itemNum --;
+                        return temp;
+                  }
+
+                 hashval++;
+                 //探测
+                 hashval=hashval%arraySize;
+             }
+
+             return null; //表示,哈希表里没有要删除的目标数据项，什么都没有删除。
+
+
+         }
+
+
     }
 
 
