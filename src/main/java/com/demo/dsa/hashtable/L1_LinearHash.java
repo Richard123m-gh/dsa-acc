@@ -1,6 +1,5 @@
 package com.demo.dsa.hashtable;
 
-import sun.jvm.hotspot.jdi.CharValueImpl;
 
 /**
  * @author Richard123m
@@ -14,8 +13,21 @@ public class L1_LinearHash {
 
     public static void main(String[] args) {
 
-        System.out.println(Integer.MAX_VALUE);
-        System.out.println(Long.MAX_VALUE);
+            MyHashTable myHashTable=new MyHashTable(100);
+            myHashTable.insert(new DataItem(12));
+            myHashTable.insert(new DataItem(200));
+            myHashTable.insert(new DataItem(120));
+            myHashTable.insert(new DataItem(30));
+            myHashTable.insert(new DataItem(50));
+
+            myHashTable.display();
+
+            DataItem dataItem=myHashTable.find(12);
+            System.out.println(dataItem.getData());
+
+            myHashTable.delete(12);
+
+            myHashTable.display();
 
 
     }
@@ -74,9 +86,9 @@ class MyHashTable{
         System.out.println("hashtable:  ");
         for(int i=0;i<arraySize;i++){
               if(hashArray[i]!=null){
-                  System.out.print(hashArray[i].getData()+"   ");
+                  System.out.println("index=>"+i+"\t"+hashArray[i].getData()+"   ");
               }else{
-                  System.out.println("***");
+                 // System.out.println("***");
               }
 
         }
@@ -87,7 +99,7 @@ class MyHashTable{
          目的：将输入大范围的key，返回为输出小范围的数.
      */
     public int hashFunction(int key){
-          return key%arraySize;
+          return key % arraySize;
     }
 
 
@@ -97,7 +109,7 @@ class MyHashTable{
          //1. 如果hash表满了,对hash表进行扩容
          if(isFull()){
              System.out.println("哈希表已经满了,进行扩容.");
-
+             extend();
          }
 
          int data=item.getData();  //取出数值
@@ -164,10 +176,23 @@ class MyHashTable{
              }
 
              return null; //表示,哈希表里没有要删除的目标数据项，什么都没有删除。
+         }
+    }
 
 
+    //实现hash表中实现查找指定的数据项
+    public DataItem find(int data){
+         int hashval=hashFunction(data);  //把data进行哈希化
+         while (hashArray[hashval]!=null){
+             if(hashArray[hashval].getData()==data){  //如果找到了
+                  return hashArray[hashval];
+             }
+
+             hashval++;
+             hashval =hashval % arraySize;
          }
 
+         return null; //哈希表中没有要找的数据。
 
     }
 
