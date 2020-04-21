@@ -137,6 +137,7 @@ class MyHashTable{
         扩容
         不能将原数组的数据项，直接复制到新数组的相同位置上。
 
+         因为哈希化时其分母变大的了，位置也随变了
      */
     private void  extend(){
 

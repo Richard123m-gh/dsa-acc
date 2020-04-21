@@ -81,20 +81,21 @@ public class L1_BinaryTree {
               return;
           }else{
               midOrder(current.getLeftChild());
-              System.out.println(current.getData());
+              System.out.println("中序=>"+current.getData());
               midOrder(current.getRightChild());
           }
     }
 
     //前序遍历
-    public void preOrder(L1_Node current){
+    public void preOrder(L1_Node current) throws Exception{
         //先左
         if(current==null){ //递归边界条件
             return;
         }else{
-            System.out.println(current.getData()); //根节点
+            System.out.println("前序=>"+current.getData()); //根节点
             preOrder(current.getLeftChild());
             preOrder(current.getRightChild());
+            Thread.sleep(100);
         }
     }
 
@@ -106,7 +107,7 @@ public class L1_BinaryTree {
         }else{
             afterOrder(current.getLeftChild());
             afterOrder(current.getRightChild());
-            System.out.println(current.getData());
+            System.out.println("后序=>"+current.getData());
         }
     }
 

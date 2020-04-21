@@ -8,7 +8,7 @@ import com.google.gson.Gson;
  */
 public class L1_Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
 
           L1_BinaryTree bt=insert();
 
@@ -23,12 +23,14 @@ public class L1_Main {
 
           //中序遍历
           bt.midOrder(root);
+          bt.preOrder(root);
+          bt.afterOrder(root);
 
 
           //删除
           bt.delete(85);
 
-          bt.midOrder(root);
+        //  bt.midOrder(root);
 
 
     }
