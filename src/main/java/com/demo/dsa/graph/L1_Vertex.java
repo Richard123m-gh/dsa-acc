@@ -13,9 +13,6 @@ package com.demo.dsa.graph;
  */
 public class L1_Vertex {
 
-
-
-
       public char label;     //顶点内
       public boolean isVistied;   //顶点位，表示是否被访问过。
 
