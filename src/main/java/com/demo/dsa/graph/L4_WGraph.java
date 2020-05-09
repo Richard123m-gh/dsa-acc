@@ -94,7 +94,7 @@ public class L4_WGraph {
                  if(vertexList[priorityQ.peekN(i).startVert].isInTree
                      && vertexList[priorityQ.peekN(i).endVert].isInTree){
 
-                     priorityQ.removeN(i);
+                     priorityQ.removeN(i);   //比如，第二步会删掉BD间的边
 
                  }
              }
