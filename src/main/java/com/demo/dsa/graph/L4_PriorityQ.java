@@ -4,7 +4,7 @@ package com.demo.dsa.graph;
  * @author Richard123m
  * @date 2020-05-08
  *
- *  优先级队列
+ *  全部边放在一个优先级队列
  *
  */
 public class L4_PriorityQ {
@@ -23,7 +23,7 @@ public class L4_PriorityQ {
 
             int i;
             for(i=0;i<size;i++){
-                  if(edge.price>=edgeArray[i].price) {
+                  if(edge.price >= edgeArray[i].price) {
                       break;
                   }
             }
@@ -41,20 +41,20 @@ public class L4_PriorityQ {
        }
 
        //删除并获取到队列中最小的权的边
-       public L4_Edge removeMain(){
+       public L4_Edge removeMin(){
             return edgeArray[--size];
        }
 
        //删除指定下标的边
        public void removeN(int n){
-            for(int i=0;i<size;i++){
+            for(int i=n;i<size-1;i++){
                  edgeArray[i]=edgeArray[i+1];
             }
             size--;
        }
 
        //获取最小的边，不删除
-       public L4_Edge peekMain(){
+       public L4_Edge peekMin(){
             return edgeArray[size-1];
        }
 
