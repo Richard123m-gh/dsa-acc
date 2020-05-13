@@ -117,17 +117,70 @@ public class L5_Graph {
 
     //找到uPath数组distance值最小的元素，返回其下标
     private int getMin(){
-         return 0;
+
+         int minDist=INF;
+         int indexMin=0;
+         for(int i=0;i<nVerts;i++){
+              if(!vertexList[i].isInTree
+                    && uPath[i].distance < minDist){
+
+                   minDist=uPath[i].distance;
+                   indexMin=i;
+              }
+         }
+
+
+         return indexMin;
     }
 
     //if('B到D,C,E的距离' + 'AB距离' < 'A到D，C，E的距离')则更新U里的对应数据。
     private void adjust_uPath(){
+
+          int j=1;  //从1开始循环，跳晕了起点0
+          while (j<nVerts){
+
+              //如果扫描到的点，如果在S集合，跳过
+              if(vertexList[j].isInTree){
+                  j++;
+                  continue;
+              }
+
+              //上面的if过滤后，剩下的点，就都是U集合里的点
+              //拿到上个距离
+              int currentToj=adjMat[currentVert][j];
+              int startToj=startToCurrent + currentToj; //左边的距离
+              int rightDis=uPath[j].distance;
+
+              if(startToj < rightDis){
+
+                   //更新对应数据
+                   uPath[j].parentVert=currentVert;
+                   uPath[j].distance=startToj;
+              }
+              j++;
+          }
 
     }
 
     //输出结果
     private void displayPaths(){
 
+         for(int j=0;j<nVerts;j++){
+             //到目标节点
+             System.out.print(vertexList[j].label+"=");
+
+             //从起始到目标点之间的最短的距离
+             if(uPath[j].distance==INF){
+                 System.out.print("inf");
+             }else{
+                 System.out.print(uPath[j].distance);
+             }
+
+             char parent=vertexList[uPath[j].parentVert].label;
+             System.out.print("(经过点:"+parent+")");
+
+             System.out.println();
+         }
     }
 
 
