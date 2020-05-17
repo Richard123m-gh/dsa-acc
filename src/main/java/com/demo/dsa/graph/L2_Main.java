@@ -11,7 +11,7 @@ package com.demo.dsa.graph;
  *   | --- D
  *   | --- E
  *
- *
+ *   最小生成树
  *
  */
 public class L2_Main {
